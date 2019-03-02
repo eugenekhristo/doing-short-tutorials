@@ -1,8 +1,28 @@
 const fs = require('fs');
-const {add, minus} = require('./utils');
+const events = require('events');
 
-// console.log(__dirname);
-// console.log(__filename);
+class Person extends events.EventEmitter {
+  constructor(name) {
+    super();
+    this.name = name;
+  }
+}
 
-console.log(add(2, 3));
-console.log(minus(7, 3));
+const serj = new Person('Serj');
+const millie = new Person('Millie');
+
+const people = [serj, millie];
+
+people.forEach(person => {
+  person.on('speak', e => console.log(`${e.name} said: ${e.message}!`))
+})
+
+serj.emit('speak', {
+  message: 'Imperfect harmonies',
+  name: serj.name
+})
+
+serj.emit('speak', {
+  message: 'Strangest things',
+  name: millie.name
+})
