@@ -1,15 +1,14 @@
 const fs = require('fs');
+const http = require('http');
 
-// remove file
-// fs.unlinkSync('./writeToMe.txt');
+const server = http.createServer((req, res) => {
+  res.writeHead(200, {
+    'Content-Type': 'text/plain'
+  });
 
-// create and remove dir
-// fs.mkdir('./stuff', err => {
-//   setTimeout(() => fs.rmdirSync('./stuff'), 2000)
-// })
-
-fs.mkdir('./stuff', err => {
-  fs.readFile('./readme.txt', 'utf8', (err ,data) => {
-    fs.writeFile('./stuff/writeMe.txt', `${data} ✌😎`, () => {})
-  })
+  res.end('Hey Eugene! =)');
 })
+
+
+server.listen(3000, '192.168.0.100');
+console.log('SERVER is started...');
