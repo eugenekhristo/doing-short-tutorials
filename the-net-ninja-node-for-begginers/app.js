@@ -1,14 +1,10 @@
 const fs = require('fs');
 const http = require('http');
 
-const server = http.createServer((req, res) => {
-  res.writeHead(200, {
-    'Content-Type': 'text/plain'
-  });
+const readStream = fs.createReadStream(__dirname + '/readMe.txt');
+const writeStream = fs.createWriteStream(__dirname + '/writeMe.txt');
 
-  res.end('Hey Eugene! =)');
-})
-
-
-server.listen(3000, '192.168.0.100');
-console.log('SERVER is started...');
+readStream.on('data', chunk => {
+  console.log('Chunk recieved: ');
+  writeStream.write(chunk);
+});
