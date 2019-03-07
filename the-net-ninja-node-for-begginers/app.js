@@ -1,10 +1,9 @@
 const fs = require('fs');
 const http = require('http');
 
-const readStream = fs.createReadStream(__dirname + '/readMe.txt');
-
 const myServer = http.createServer((req, res) => {
-  res.writeHead(200, {'Content-Type': 'text/plain'});
+  res.writeHead(200, {'Content-Type': 'text/html'});
+  const readStream = fs.createReadStream(__dirname + '/index.html');
   readStream.pipe(res);
 });
 
