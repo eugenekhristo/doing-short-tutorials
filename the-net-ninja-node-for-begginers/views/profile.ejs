@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Super Site</title>
+    <style>
+      body {
+        margin: 0;
+        height: 100vh;
+        background-color: rgb(233, 178, 39);
+        color: #fff;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        font-family: sans-serif;
+      }
+
+      h1 {
+        text-transform: uppercase;
+      }
+
+      ul {
+        list-style-type: none;
+        padding-left: 0;
+      }
+      
+    </style>
+  </head>
+  <body>
+    <div>
+      <h1>
+        Profile page of
+        <span style="color: hotpink"><%= person.name %>!</span> 🐵
+      </h1>
+      <h3><strong>Age: </strong> <%= person.age %></h3>
+      <h3><strong>City: </strong> <%= person.city %></h3>
+      <hr>
+      <h2>Hobbies</h2>
+      <ul>
+        <% person.hobbies.forEach(hobbie => { %>
+          <li><%= hobbie %></li>
+        <% }); %>
+      </ul>
+    </div>
+  </body>
+</html>
