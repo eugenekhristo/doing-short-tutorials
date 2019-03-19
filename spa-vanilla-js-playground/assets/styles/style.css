@@ -19,9 +19,8 @@ body {
   font-family: monospace;
   font-weight: 400;
   color: var(--color-text);
-  /* min-height: 100vh; */
   background-color: var(--color-bg);
-    background:  var(--color-bg) url(./assets/images/pattern.png) fixed;
+  background: var(--color-bg) url(../images/pattern.png) fixed;
   background-size: 400px;
   padding-bottom: 50px;
 }
@@ -35,7 +34,6 @@ body {
 
 .gallery {
   margin: 25px 0;
-  
 }
 
 .gallery__row {
