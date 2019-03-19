@@ -1,9 +1,17 @@
-import state from './state.js';
+import state from "./state.js";
 
-export const formEl = document.getElementById("search");
-export const inputEl = document.getElementById("searchInput");
-export const submitBtnEl = document.getElementById("submitSearch");
-export const galleryEl = document.getElementById("gallery");
-export const showMoreBtnEl = document.getElementById("showMore");
+export let formEl = document.getElementById("search");
+export let inputEl = document.getElementById("searchInput");
+export let submitBtnEl = document.getElementById("submitSearch");
+export let galleryEl = document.getElementById("gallery");
+export let showMoreBtnEl = document.getElementById("showMore");
 
-submitBtnEl.disabled = !state.inputValue;
+export function updateElementsForSearchPage() {
+  formEl = document.getElementById("search");
+  inputEl = document.getElementById("searchInput");
+  submitBtnEl = document.getElementById("submitSearch");
+  galleryEl = document.getElementById("gallery");
+  showMoreBtnEl = document.getElementById("showMore");
+}
+
+submitBtnEl && (submitBtnEl.disabled = !state.inputValue);

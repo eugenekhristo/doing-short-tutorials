@@ -7,8 +7,9 @@ import state from "./state.js";
 let galleryThumbnailsHTML = "";
 
 export async function handleShowMore() {
-  // window.history.pushState(null, '', `${window.location.origin}${searchString}`);
   const searchString = makeSearchString(state.queryString);
+  window.history.pushState(null, '', `${window.location.origin}/search${searchString}`);
+  
   const { data: gifsBlob } = await httpService.fetchGifs(
     searchString,
     state.thumbnailsOffset
