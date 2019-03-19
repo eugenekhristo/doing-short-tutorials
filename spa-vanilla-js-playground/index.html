@@ -4,18 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Hello 😍</title>
-    <style></style>
+    <title>Giphy 😍</title>
+    <link rel="stylesheet" href="./style.css" />
   </head>
   <body>
-    <button onclick="onNavItemClick('/')">Home</button>
-    <button onclick="onNavItemClick('/about?q=smile')">About</button>
-    <button onclick="onNavItemClick('/contact')">Contact</button>
+    <!-- search page -->
 
+    <div class="container">
+      <h1>Giphy EXPLORER 😲</h1>
 
+      <form class="search" id="search">
+        <input type="text" class="search__input" id="searchInput">
+        <button class="search__btn" id="submitSearch">Search</button>
+      </form>
 
-    <div id="content"></div>
+      <section class="gallery" id="gallery">
+        
+      </section>
 
-    <script src="./assets/index.js"></script>
+      <button id="showMore">Show Me More 😹</button>
+    </div>
+
+    <script src="./index.js"></script>
   </body>
 </html>
