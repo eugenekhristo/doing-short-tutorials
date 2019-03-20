@@ -25,4 +25,5 @@ export const searchPage = `
 export const gifPage = `
   <h1>Gif Page</h1>
   <div class="gif" id="gif-root"></div>
+  <button id="goBackBtn">Go back</button>
 `;

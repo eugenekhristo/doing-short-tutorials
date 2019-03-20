@@ -19,7 +19,17 @@ export function makeSearchString(queryString) {
   return `?q=${queryString}`;
 }
 
-// -----------------------------------------------------------------------
+/** 
+ * It will return first part of the current path name of the page. E.g. - /about/sdf234 => about
+ * If there's no path name on the page - it will return 'home'
+ */
+export function getPureFirstPartOfPathName() {
+  return location.pathname.split('/').slice(1)[0] || 'home';
+}
+
+export function getIdParamValueFromUrl() {
+  return window.location.pathname.split('/').reverse()[0];
+}
 
 function scrollToY(y) {
   scrollTo({
@@ -39,18 +49,4 @@ export function scrollPageToBottom() {
   );
 
   setTimeout(() => scrollToY(pageScrollHeight), 200);
-}
-
-// -----------------------------------------------------------------------
-
-/** 
- * It will return first part of the current path name of the page. E.g. - /about/sdf234 => about
- * If there's no path name on the page - it will return 'home'
- */
-export function getPureFirstPartOfPathName() {
-  return location.pathname.split('/').slice(1)[0] || 'home';
-}
-
-export function getIdParamValueFromUrl() {
-  return window.location.pathname.split('/').reverse()[0];
 }

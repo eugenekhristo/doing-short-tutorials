@@ -8,7 +8,8 @@ import {
   searchInputEl,
   searchSubmitBtnEl,
   searchShowMoreBtnEl,
-  searchGalleryEl
+  searchGalleryEl,
+  gifGoBackBtn
 } from "../domElements.js";
 import { handleHomeSubmit, handleShowMore, handleGifPageLoading } from "./handlers.js";
 import { router } from "../routing/router.js";
@@ -64,6 +65,14 @@ function search() {
 // GIF PAGE
 function gif() {
   handleGifPageLoading();
+  // FIXME: extract into separate event handler
+  gifGoBackBtn.addEventListener('click', () => {
+    window.history.back();
+    // const {search, pathname} = window.location;
+    // console.log(search)
+    // console.log(pathname)
+    // router.goTo(pathname, search);
+  })
 }
 
 export const addEventListenersFor = {

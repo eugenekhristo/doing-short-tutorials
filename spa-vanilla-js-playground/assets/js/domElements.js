@@ -27,9 +27,9 @@ function search() {
 }
 
 // GIF PAGE
-
+export let gifGoBackBtn;
 function gif() {
-
+  gifGoBackBtn = document.getElementById('goBackBtn');
 }
 
 export const selectAllElementsFor = {

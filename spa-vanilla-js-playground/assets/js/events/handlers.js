@@ -8,6 +8,7 @@ import {
 import * as httpService from "../http-service.js";
 import state from "../state.js";
 import { router } from "../routing/router.js";
+import { tunePage } from "../../../index.js";
 
 // ------------------------------- HOME ----------------------------------------
 
@@ -67,8 +68,6 @@ export async function handleGifPageLoading() {
   const gifInfo = await httpService.fetchGifById(id);
   const {imageUrl, imageHeight, title, createdAt, username, userAvatartUrl} = gifInfo;
 
-  console.log(createdAt);
-
   const HTMLTemplate  = `
   <video
     class="gif__image"
@@ -98,6 +97,4 @@ export async function handleGifPageLoading() {
 
   const gifRoot = document.getElementById('gif-root');
   gifRoot.innerHTML = HTMLTemplate;
-  console.log(gifInfo);
-  
 }

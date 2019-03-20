@@ -32,7 +32,7 @@ tunePage();
 
 
 // WHEN CLICK back BTN of the browser
-// window.onpopstate = () => {
-//   rootEl.innerHTML = routes[window.location.pathname];
-//   tunePage();
-// };
+window.onpopstate = () => {
+  const {pathname, search} = window.location;
+  router.goTo(pathname, search);
+};

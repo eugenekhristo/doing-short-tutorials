@@ -19,8 +19,6 @@ export async function fetchGifById(id) {
     generateRequestUrlForSingleGif(id)
   ).then(blob => blob.json());
 
-  console.log(gifBlob);
-
   const gifInfo = createGifInfoDto(gifBlob);
   return Promise.resolve(gifInfo);
 }

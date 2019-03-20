@@ -20,7 +20,6 @@ export function tunePage() {
 
   // 2) Select AllElements and addEventListeners for the page matching pathname
   const purePathName = getPureFirstPartOfPathName();
-
   selectAllElementsFor[purePathName]();
   setTimeout(() => addEventListenersFor[purePathName](), 0);
 }
