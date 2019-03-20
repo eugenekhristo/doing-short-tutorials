@@ -8,7 +8,6 @@ import {
 import * as httpService from "../http-service.js";
 import state from "../state.js";
 import { router } from "../routing/router.js";
-import { tunePage } from "../../../index.js";
 
 // ------------------------------- HOME ----------------------------------------
 
@@ -19,7 +18,8 @@ export async function handleHomeSubmit() {
 
 // ------------------------------- SEARCH ----------------------------------------
 
-let galleryThumbnailsHTML = "";
+
+let galleryThumbnailsHTML = '';
 
 export async function handleShowMore() {
   const searchString = makeSearchString(state.queryString);
@@ -56,6 +56,7 @@ export async function handleShowMore() {
   galleryRowEl.insertAdjacentHTML("beforeend", galleryThumbnailsHTML);
   searchGalleryEl.append(galleryRowEl);
 
+  state.galleryThumbnailsHTML += galleryThumbnailsHTML;
   galleryThumbnailsHTML = "";
   state.thumbnailsOffset += OFFSET_STEP;
 

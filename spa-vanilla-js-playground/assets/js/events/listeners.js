@@ -32,7 +32,11 @@ function home() {
 
 // SEARCH PAGE
 function search() {
-  handleShowMore();
+  if (!state.galleryThumbnailsHTML) {
+    handleShowMore();
+  } else {
+    searchGalleryEl.innerHTML = state.galleryThumbnailsHTML;
+  }
 
   searchFormEl.addEventListener("submit", e => {
     e.preventDefault();
