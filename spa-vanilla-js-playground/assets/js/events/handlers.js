@@ -1,8 +1,10 @@
-import { OFFSET_STEP } from "./constants.js";
-import { galleryEl } from "./domElements.js";
-import { makeSearchString, scrollPageToBottom } from "./utils.js";
-import * as httpService from "./http-service.js";
-import state from "./state.js";
+import { OFFSET_STEP } from "../constants.js";
+import { homePageElements, searchPageElements } from "../domElements.js";
+import { makeSearchString, scrollPageToBottom } from "../utils.js";
+import * as httpService from "../http-service.js";
+import state from "../state.js";
+
+// ------------------------------- SEARCH ----------------------------------------
 
 let galleryThumbnailsHTML = "";
 
@@ -24,10 +26,12 @@ export async function handleShowMore() {
   });
 
   galleryRowEl.insertAdjacentHTML("beforeend", galleryThumbnailsHTML);
-  galleryEl.append(galleryRowEl);
+  searchPageElements.galleryEl.append(galleryRowEl);
 
   galleryThumbnailsHTML = "";
   state.thumbnailsOffset += OFFSET_STEP;
 
   scrollPageToBottom();
 }
+
+// -------------------------------------------------------------------------------

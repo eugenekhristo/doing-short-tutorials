@@ -1,29 +1,26 @@
-import {
-  formEl,
-  inputEl,
-  showMoreBtnEl,
-  submitBtnEl
-} from "./assets/js/domElements.js";
-import { replaceSpacesWithSymbol } from "./assets/js/utils.js";
-import state from "./assets/js/state.js";
-import { handleShowMore } from "./assets/js/eventHandlers.js";
+import { getPureFirstPartOfPathName} from './assets/js/utils.js';
+import { selectAllElementsFor } from './assets/js/domElements.js';
+import { addEventListenersFor } from './assets/js/events/listeners.js';
 
+// FIXME: put somewhere in routing
+const homePathNameRegEx = /^\/$/;
+const searchPathNameRegEx = /^\/search$/;
+const gifPathNameRegEx = /^\/gif\/\w+$/;
 
-export function addEventListenersForSearchPage() {
-  formEl.addEventListener("submit", e => {
-    e.preventDefault();
-  });
+const pathNamesRegEx = [homePathNameRegEx, searchPathNameRegEx, gifPathNameRegEx];
 
-  inputEl.addEventListener("input", e => {
-    state.queryString = replaceSpacesWithSymbol(e.target.value, "+");
-    submitBtnEl.disabled = !state.queryString;
-  });
+function tunePage() {
+  // if path is not in routes Keys - return (or redirect 404)
+  const pagePathName = window.location.pathname;
+  const isKnownPathName = pathNamesRegEx.some(regEx => regEx.test(pagePathName));
+  if (!isKnownPathName) return; // or redirect of 404 page
 
-  submitBtnEl.addEventListener("click", handleShowMore);
-  showMoreBtnEl.addEventListener("click", handleShowMore);
+  // 2) Select AllElements and addEventListeners for the page matching pathname
+  const purePathName = getPureFirstPartOfPathName();
+
+  setTimeout(() => selectAllElementsFor[purePathName](), 0)
+  setTimeout(() => addEventListenersFor[purePathName](), 3000);
 }
 
-// add this stuff only if this is /search page
-if (window.location.pathname.includes("/search")) {
-  addEventListenersForSearchPage();
-}
+tunePage();
+

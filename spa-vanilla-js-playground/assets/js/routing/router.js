@@ -1,32 +1,14 @@
-import { addEventListenersForSearchPage } from "../../index.js";
-import { updateElementsForSearchPage } from "./domElements.js";
+import * as pages from './routePages.js';
 
+export const routes = {
+  "/": pages.homePage,
+  "/search": pages.searchPage,
+  // "/gif/:id": searchPage,
+};
+
+// FIXME: put it into domElements
 const rootEl = document.getElementById("root");
 
-let homePage = `
-  <h1>Home Page</h1>
-  <button id="dada">Go search</button>
-`;
-
-let searchPage = `
-  <h1>Search Page</h1>
-
-  <form class="search" id="search">
-    <input type="text" class="search__input" id="searchInput">
-    <button class="search__btn" id="submitSearch">Search</button>
-  </form>
-
-  <section class="gallery" id="gallery">
-    
-  </section>
-
-  <button id="showMore">Show Me More 😹</button>
-`;
-
-const routes = {
-  "/": homePage,
-  "/search": searchPage
-};
 
 // TODO: make a router object and add this one as method
 function goTo(pathName) {
@@ -53,10 +35,3 @@ window.onpopstate = () => {
 
 // first loading of the app
 rootEl.innerHTML = routes[window.location.pathname];
-
-const dadaEl = document.getElementById("dada");
-dadaEl.addEventListener("click", () => {
-  goTo("/search");
-  updateElementsForSearchPage();
-  setTimeout(() => addEventListenersForSearchPage(), 0);
-});
