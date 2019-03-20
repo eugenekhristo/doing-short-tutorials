@@ -26,9 +26,16 @@ function search() {
   searchShowMoreBtnEl = document.getElementById("showMore");
 }
 
+// GIF PAGE
+
+function gif() {
+
+}
+
 export const selectAllElementsFor = {
   home,
-  search
+  search,
+  gif
 };
 
 // submitBtnEl && (submitBtnEl.disabled = !state.inputValue);

@@ -7,9 +7,11 @@ import {
   searchFormEl,
   searchInputEl,
   searchSubmitBtnEl,
-  searchShowMoreBtnEl
+  searchShowMoreBtnEl,
+  searchGalleryEl
 } from "../domElements.js";
-import { handleHomeSubmit, handleShowMore } from "./handlers.js";
+import { handleHomeSubmit, handleShowMore, handleGifPageLoading } from "./handlers.js";
+import { router } from "../routing/router.js";
 
 // HOME PAGE
 function home() {
@@ -29,6 +31,8 @@ function home() {
 
 // SEARCH PAGE
 function search() {
+  handleShowMore();
+
   searchFormEl.addEventListener("submit", e => {
     e.preventDefault();
   });
@@ -47,10 +51,23 @@ function search() {
 
   searchSubmitBtnEl.disabled = !state.queryString;
 
-  handleShowMore();
+  // FIXME: extract into separate event handler
+  searchGalleryEl.addEventListener('click', e => {
+    const clickedElement = e.target;
+    if (!clickedElement.matches('video.gallery__item')) return;
+    // we can pass all parameters as query string
+    const {id} = clickedElement.dataset;
+    router.goTo(`/gif/${id}`);
+  })
+}
+
+// GIF PAGE
+function gif() {
+  handleGifPageLoading();
 }
 
 export const addEventListenersFor = {
   home,
-  search
+  search,
+  gif
 };

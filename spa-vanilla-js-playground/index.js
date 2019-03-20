@@ -13,7 +13,10 @@ export function tunePage() {
   // if path is not in routes Keys - return (or redirect 404)
   const pagePathName = window.location.pathname;
   const isKnownPathName = pathNamesRegEx.some(regEx => regEx.test(pagePathName));
-  if (!isKnownPathName) return; // or redirect of 404 page
+  if (!isKnownPathName) {
+    console.log('UNKNOWN ROUTE!');
+    return;
+  }; // or redirect of 404 page
 
   // 2) Select AllElements and addEventListeners for the page matching pathname
   const purePathName = getPureFirstPartOfPathName();

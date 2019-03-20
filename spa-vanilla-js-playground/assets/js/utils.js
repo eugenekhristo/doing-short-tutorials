@@ -50,3 +50,7 @@ export function scrollPageToBottom() {
 export function getPureFirstPartOfPathName() {
   return location.pathname.split('/').slice(1)[0] || 'home';
 }
+
+export function getIdParamValueFromUrl() {
+  return window.location.pathname.split('/').reverse()[0];
+}

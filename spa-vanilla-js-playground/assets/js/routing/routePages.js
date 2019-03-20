@@ -21,3 +21,8 @@ export const searchPage = `
 
   <button id="showMore">Show Me More 😹</button>
 `;
+
+export const gifPage = `
+  <h1>Gif Page</h1>
+  <div class="gif" id="gif-root"></div>
+`;
