@@ -9,7 +9,7 @@ const gifPathNameRegEx = /^\/gif\/\w+$/;
 
 const pathNamesRegEx = [homePathNameRegEx, searchPathNameRegEx, gifPathNameRegEx];
 
-function tunePage() {
+export function tunePage() {
   // if path is not in routes Keys - return (or redirect 404)
   const pagePathName = window.location.pathname;
   const isKnownPathName = pathNamesRegEx.some(regEx => regEx.test(pagePathName));
@@ -18,9 +18,8 @@ function tunePage() {
   // 2) Select AllElements and addEventListeners for the page matching pathname
   const purePathName = getPureFirstPartOfPathName();
 
-  setTimeout(() => selectAllElementsFor[purePathName](), 0)
-  setTimeout(() => addEventListenersFor[purePathName](), 3000);
+  selectAllElementsFor[purePathName]();
+  setTimeout(() => addEventListenersFor[purePathName](), 0);
 }
 
-tunePage();
 
