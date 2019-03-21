@@ -1,12 +1,12 @@
-function getRequestUrlForSeveralGifs(searchString, offset = 0) {
-  return `https://api.giphy.com/v1/gifs/search${searchString}&api_key=C1HjBbRbN4I6lKblBGpY1bxcpdopyH6T&offset=${offset}&limit=5`;
+function getRequestUrlForSeveralGifs(queryString, offset = 0) {
+  return `https://api.giphy.com/v1/gifs/search${queryString}&api_key=C1HjBbRbN4I6lKblBGpY1bxcpdopyH6T&offset=${offset}&limit=5`;
 }
 
 function getRequestUrlForSingleGif(id) {
   return `https://api.giphy.com/v1/gifs/${id}?api_key=C1HjBbRbN4I6lKblBGpY1bxcpdopyH6T`;
 }
 
-function createGifInfoDto(gifBlob) {
+function getGifInfoDto(gifBlob) {
   const { id, title, import_datetime, user, images } = gifBlob;
 
   return {
@@ -21,21 +21,25 @@ function createGifInfoDto(gifBlob) {
 }
 
 const HttpService = {
-  getGifs(searchString, offset) {
+  getGifs(queryString, offset) {
     return Promise.resolve(
-      fetch(getRequestUrlForSeveralGifs(searchString, offset)).then(blob =>
-        blob.json()
-      )
+      fetch(getRequestUrlForSeveralGifs(queryString, offset))
+      .then(blob => blob.json())
+      .catch(console.log)
     );
   },
 
   async getGifById(id) {
-    const { data: gifBlob } = await fetch(getRequestUrlForSingleGif(id)).then(
-      blob => blob.json()
-    );
+    try {
+      const { data: gifBlob } = await fetch(getRequestUrlForSingleGif(id))
+                                .then(blob => blob.json());
 
-    const gifInfo = createGifInfoDto(gifBlob);
-    return Promise.resolve(gifInfo);
+      const gifInfo = getGifInfoDto(gifBlob);
+      return Promise.resolve(gifInfo);
+
+    } catch (error) {
+      console.log(error);
+    }
   }
 };
 

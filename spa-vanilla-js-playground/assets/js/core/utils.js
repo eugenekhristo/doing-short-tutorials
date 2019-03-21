@@ -1,29 +1,17 @@
-/**
- * Take any string and trims spaces and also replaces any 
- * amount of spaces with provided symbol
- * @param {string} text source from which spaces must be
- *  replaced with provided symbol
- * @param {string} symbol symbol for space replacement
- * @returns {string} string without spaces with provided symbol
- */
-export function replaceSpacesWithSymbol(text = "", symbol = "") {
+export function replaceSpacesWithSymbol(text = '', symbol = '') {
   return text.trim().replace(/\s+/g, symbol);
 }
 
-
-/**
- * Take a query string and returns "search string"
- * @param {string} queryString string in a+bc+a format
- * @returns {string} string in '?q=queryString' format
- */
-export function makeSearchString(queryString) {
-  return `?q=${queryString}`;
+export function makeQueryString(queryStringValue) {
+  return `?q=${queryStringValue}`;
 }
 
-/** 
- * It will return first part of the current path name of the page. E.g. - /about/sdf234 => about
- * If there's no path name on the page - it will return 'home'
- */
+export function getQueryStringValueOfCurrentPage() {
+  const searchParams = new URLSearchParams(window.location.search);
+  return searchParams.get('q');
+}
+
+// FIXME: later maybe make additional function for returning || home if empty and use the new function instead of this one if needed
 export function getPureFirstPartOfPathName() {
   return location.pathname.split('/').slice(1)[0] || 'home';
 }
@@ -32,14 +20,9 @@ export function getIdParamValueFromUrl() {
   return window.location.pathname.split('/').reverse()[0];
 }
 
-export function getQueryStringValueOfCurrentPage() {
-  const searchParams = new URLSearchParams(window.location.search);
-  return searchParams.get("q");
-}
-
 function scrollToY(y) {
   scrollTo({
-    behavior: "smooth",
+    behavior: 'smooth',
     top: y
   });
 }

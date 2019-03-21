@@ -1,4 +1,4 @@
-import { handleRouteSelection, tunePage } from './routing/router.js';
+import { handleRouteSelection, tunePage } from './core/routing/routerUtils.js';
 
 (function initApp() {
   handleRouteSelection(window.location.pathname);

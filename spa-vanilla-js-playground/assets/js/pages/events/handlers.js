@@ -1,19 +1,19 @@
-import { OFFSET_STEP } from '../core/constants.js/index.js';
-import { searchGalleryEl } from '../domElements.js';
+import { OFFSET_STEP } from '../core/constants.js';
 import {
-  makeSearchString,
+  makeQueryString,
   scrollPageToBottom,
   getIdParamValueFromUrl
-} from '../core/utils.js/index.js';
-import * as httpService from '../core/httpService.js/index.js';
-import state from '../core/state.js/index.js';
-import { router } from '../routing/router.js';
+} from '../core/utils.js';
+import HttpService from '../core/httpService.js';
+import { Router } from '../routing/router.js';
+import state from '../core/state.js';
+import { searchGalleryEl } from '../domElements.js';
 
 // ------------------------------- HOME ----------------------------------------
 
 export async function handleHomeSubmit() {
-  const searchString = makeSearchString(state.queryString);
-  router.goTo('/search', searchString);
+  const searchString = makeQueryString(state.queryStringValue);
+  Router.goTo('/search', searchString);
 }
 
 // ------------------------------- SEARCH ----------------------------------------
@@ -21,16 +21,16 @@ export async function handleHomeSubmit() {
 let galleryThumbnailsHTML = '';
 
 export async function handleShowMore() {
-  const searchString = makeSearchString(state.queryString);
+  const searchString = makeQueryString(state.queryStringValue);
   window.history.pushState(
     null,
     '',
     `${window.location.origin}/search${searchString}`
   );
 
-  const { data: gifsBlob } = await httpService.fetchGifs(
+  const { data: gifsBlob } = await HttpService.getGifs(
     searchString,
-    state.thumbnailsOffset
+    state.thumbnailsOffsetInQueryString
   );
 
   const galleryRowEl = document.createElement('div');
@@ -56,7 +56,7 @@ export async function handleShowMore() {
 
   state.galleryThumbnailsHTML += galleryThumbnailsHTML;
   galleryThumbnailsHTML = '';
-  state.thumbnailsOffset += OFFSET_STEP;
+  state.thumbnailsOffsetInQueryString += OFFSET_STEP;
 
   scrollPageToBottom();
 }
@@ -64,7 +64,7 @@ export async function handleShowMore() {
 // ------------------------------- GIf -------------------------------------------
 export async function handleGifPageLoading() {
   const id = getIdParamValueFromUrl();
-  const gifInfo = await httpService.fetchGifById(id);
+  const gifInfo = await HttpService.getGifById(id);
   const {
     imageUrl,
     imageHeight,

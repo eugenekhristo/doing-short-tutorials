@@ -1,5 +1,14 @@
-import state from "../state.js";
-import { replaceSpacesWithSymbol, getQueryStringValueOfCurrentPage } from "../utils.js";
+import {
+  replaceSpacesWithSymbol,
+  getQueryStringValueOfCurrentPage
+} from '../utils.js';
+import { Router } from '../routing/router.js';
+import state from '../state.js';
+import {
+  handleHomeSubmit,
+  handleShowMore,
+  handleGifPageLoading
+} from './handlers.js';
 import {
   homeFormEl,
   homeInputEl,
@@ -10,25 +19,23 @@ import {
   searchShowMoreBtnEl,
   searchGalleryEl,
   gifGoBackBtn
-} from "../domElements.js";
-import { handleHomeSubmit, handleShowMore, handleGifPageLoading } from "./handlers.js";
-import { router } from "../routing/router.js";
+} from '../domElements.js';
 
 //------------------------------------------- HOME PAGE -------------------------------------------
 
 function home() {
-  homeFormEl.addEventListener("submit", e => {
+  homeFormEl.addEventListener('submit', e => {
     e.preventDefault();
   });
 
-  homeInputEl.addEventListener("input", e => {
-    state.queryString = replaceSpacesWithSymbol(e.target.value, "+");
-    homeSubmitBtnEl.disabled = !state.queryString;
+  homeInputEl.addEventListener('input', e => {
+    state.queryStringValue = replaceSpacesWithSymbol(e.target.value, '+');
+    homeSubmitBtnEl.disabled = !state.queryStringValue;
   });
 
-  homeSubmitBtnEl.addEventListener("click", handleHomeSubmit);
+  homeSubmitBtnEl.addEventListener('click', handleHomeSubmit);
 
-  homeSubmitBtnEl.disabled = !state.queryString;
+  homeSubmitBtnEl.disabled = !state.queryStringValue;
 }
 
 //------------------------------------------- SEARCH PAGE -------------------------------------------
@@ -39,31 +46,31 @@ function search() {
     searchGalleryEl.innerHTML = state.galleryThumbnailsHTML;
   }
 
-  searchFormEl.addEventListener("submit", e => {
+  searchFormEl.addEventListener('submit', e => {
     e.preventDefault();
   });
 
-  searchInputEl.addEventListener("input", e => {
-    state.queryString = replaceSpacesWithSymbol(e.target.value, "+");
-    searchSubmitBtnEl.disabled = !state.queryString;
+  searchInputEl.addEventListener('input', e => {
+    state.queryStringValue = replaceSpacesWithSymbol(e.target.value, '+');
+    searchSubmitBtnEl.disabled = !state.queryStringValue;
   });
 
-  searchSubmitBtnEl.addEventListener("click", handleShowMore);
-  searchShowMoreBtnEl.addEventListener("click", handleShowMore);
+  searchSubmitBtnEl.addEventListener('click', handleShowMore);
+  searchShowMoreBtnEl.addEventListener('click', handleShowMore);
 
   const queryStringValueForInput = getQueryStringValueOfCurrentPage();
   searchInputEl.value = queryStringValueForInput;
 
-  searchSubmitBtnEl.disabled = !state.queryString;
+  searchSubmitBtnEl.disabled = !state.queryStringValue;
 
   // FIXME: extract into separate event handler
   searchGalleryEl.addEventListener('click', e => {
     const clickedElement = e.target;
     if (!clickedElement.matches('video.gallery__item')) return;
     // we can pass all parameters as query string
-    const {id} = clickedElement.dataset;
-    router.goTo(`/gif/${id}`);
-  })
+    const { id } = clickedElement.dataset;
+    Router.goTo(`/gif/${id}`);
+  });
 }
 
 //------------------------------------------- GIF PAGE -------------------------------------------
@@ -73,11 +80,11 @@ function gif() {
   // FIXME: extract into separate event handler
   gifGoBackBtn.addEventListener('click', () => {
     if (state.isPageLoadedForTheFirstTime) {
-      router.goTo('/');
+      Router.goTo('/');
     } else {
       window.history.back();
     }
-  })
+  });
 }
 
 export const addEventListenersFor = {
