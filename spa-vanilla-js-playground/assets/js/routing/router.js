@@ -1,6 +1,16 @@
 import * as pages from './routePages.js';
 import { tunePage } from '../../../index.js';
 
+function handleRouteSelection(pathName) {
+  const gifPathNameRegEx = /^\/gif\/\w+$/;
+
+  if (gifPathNameRegEx.test(pathName)) {
+    rootEl.innerHTML = routes['/gif/:id'];
+  } else {
+    rootEl.innerHTML = routes[pathName];
+  }
+}
+
 export const routes = {
   "/": pages.homePage,
   "/search": pages.searchPage,
@@ -11,22 +21,14 @@ const rootEl = document.getElementById("root");
 
 export const router = {
   goTo(pathName, searchString = '') {
-    const gifPathNameRegEx = /^\/gif\/\w+$/;
-
     window.history.pushState(null, '', window.location.origin + pathName + searchString);
-
-    if (gifPathNameRegEx.test(pathName)) {
-      rootEl.innerHTML = routes["/gif/:id"];
-    } else {
-      rootEl.innerHTML = routes[pathName];
-    }
-
+    handleRouteSelection(pathName);
     tunePage();
   }
 }
 
 // first loading of the app
-rootEl.innerHTML = routes[window.location.pathname];
+handleRouteSelection(window.location.pathname);
 tunePage();
 
 
