@@ -6,6 +6,7 @@ let inputValue = "";
 let queryString = getQueryStringValueOfCurrentPage() || "";
 // current offset of images for query URL
 let thumbnailsOffset = 0;
+let isPageLoadedForTheFirstTime = true;
 // HTML string for gallery on search page
 let galleryThumbnailsHTML = "";
 
@@ -13,5 +14,6 @@ export default {
   inputValue,
   queryString,
   thumbnailsOffset,
+  isPageLoadedForTheFirstTime,
   galleryThumbnailsHTML
 };

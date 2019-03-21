@@ -1,5 +1,6 @@
 import * as pages from './routePages.js';
 import { tunePage } from '../../../index.js';
+import state from '../state.js';
 
 function handleRouteSelection(pathName) {
   const gifPathNameRegEx = /^\/gif\/\w+$/;
@@ -24,6 +25,7 @@ export const router = {
     window.history.pushState(null, '', window.location.origin + pathName + searchString);
     handleRouteSelection(pathName);
     tunePage();
+    state.isPageLoadedForTheFirstTime = false;
   }
 }
 

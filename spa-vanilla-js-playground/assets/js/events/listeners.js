@@ -14,7 +14,8 @@ import {
 import { handleHomeSubmit, handleShowMore, handleGifPageLoading } from "./handlers.js";
 import { router } from "../routing/router.js";
 
-// HOME PAGE
+//------------------------------------------- HOME PAGE -------------------------------------------
+
 function home() {
   homeFormEl.addEventListener("submit", e => {
     e.preventDefault();
@@ -30,7 +31,7 @@ function home() {
   homeSubmitBtnEl.disabled = !state.queryString;
 }
 
-// SEARCH PAGE
+//------------------------------------------- SEARCH PAGE -------------------------------------------
 function search() {
   if (!state.galleryThumbnailsHTML) {
     handleShowMore();
@@ -65,16 +66,17 @@ function search() {
   })
 }
 
-// GIF PAGE
+//------------------------------------------- GIF PAGE -------------------------------------------
+
 function gif() {
   handleGifPageLoading();
   // FIXME: extract into separate event handler
   gifGoBackBtn.addEventListener('click', () => {
-    window.history.back();
-    // const {search, pathname} = window.location;
-    // console.log(search)
-    // console.log(pathname)
-    // router.goTo(pathname, search);
+    if (state.isPageLoadedForTheFirstTime) {
+      router.goTo('/');
+    } else {
+      window.history.back();
+    }
   })
 }
 
