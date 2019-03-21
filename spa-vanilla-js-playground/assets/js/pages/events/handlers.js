@@ -1,23 +1,22 @@
-import { OFFSET_STEP } from "../constants.js";
-import { searchGalleryEl } from "../domElements.js";
+import { OFFSET_STEP } from '../core/constants.js/index.js';
+import { searchGalleryEl } from '../domElements.js';
 import {
   makeSearchString,
   scrollPageToBottom,
   getIdParamValueFromUrl
-} from "../utils.js";
-import * as httpService from "../http-service.js";
-import state from "../state.js";
-import { router } from "../routing/router.js";
+} from '../core/utils.js/index.js';
+import * as httpService from '../core/httpService.js/index.js';
+import state from '../core/state.js/index.js';
+import { router } from '../routing/router.js';
 
 // ------------------------------- HOME ----------------------------------------
 
 export async function handleHomeSubmit() {
   const searchString = makeSearchString(state.queryString);
-  router.goTo("/search", searchString);
+  router.goTo('/search', searchString);
 }
 
 // ------------------------------- SEARCH ----------------------------------------
-
 
 let galleryThumbnailsHTML = '';
 
@@ -25,7 +24,7 @@ export async function handleShowMore() {
   const searchString = makeSearchString(state.queryString);
   window.history.pushState(
     null,
-    "",
+    '',
     `${window.location.origin}/search${searchString}`
   );
 
@@ -34,8 +33,8 @@ export async function handleShowMore() {
     state.thumbnailsOffset
   );
 
-  const galleryRowEl = document.createElement("div");
-  galleryRowEl.className = "gallery__row";
+  const galleryRowEl = document.createElement('div');
+  galleryRowEl.className = 'gallery__row';
 
   gifsBlob.forEach(blob => {
     const { mp4 } = blob.images.fixed_width;
@@ -52,11 +51,11 @@ export async function handleShowMore() {
     `;
   });
 
-  galleryRowEl.insertAdjacentHTML("beforeend", galleryThumbnailsHTML);
+  galleryRowEl.insertAdjacentHTML('beforeend', galleryThumbnailsHTML);
   searchGalleryEl.append(galleryRowEl);
 
   state.galleryThumbnailsHTML += galleryThumbnailsHTML;
-  galleryThumbnailsHTML = "";
+  galleryThumbnailsHTML = '';
   state.thumbnailsOffset += OFFSET_STEP;
 
   scrollPageToBottom();
@@ -66,9 +65,16 @@ export async function handleShowMore() {
 export async function handleGifPageLoading() {
   const id = getIdParamValueFromUrl();
   const gifInfo = await httpService.fetchGifById(id);
-  const {imageUrl, imageHeight, title, createdAt, username, userAvatartUrl} = gifInfo;
+  const {
+    imageUrl,
+    imageHeight,
+    title,
+    createdAt,
+    username,
+    userAvatartUrl
+  } = gifInfo;
 
-  const HTMLTemplate  = `
+  const HTMLTemplate = `
   <video
     autoplay loop muted oncanplay="this.play()" onloadedmetadata="this.muted = true"
     class="gif__image"
