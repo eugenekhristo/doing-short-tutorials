@@ -44,8 +44,7 @@ export async function handleShowMore() {
       title="Show detailed info"
       class="gallery__item" 
       src="${mp4}" 
-      autoplay 
-      loop 
+      autoplay loop muted oncanplay="this.play()" onloadedmetadata="this.muted = true" 
       width="200"
       data-id="${blob.id}"
     >
@@ -71,11 +70,10 @@ export async function handleGifPageLoading() {
 
   const HTMLTemplate  = `
   <video
+    autoplay loop muted oncanplay="this.play()" onloadedmetadata="this.muted = true"
     class="gif__image"
     src="${imageUrl}"
     height=${imageHeight}
-    autoplay
-    loop
   ></video>
 
   <div class="gif__short-info">
