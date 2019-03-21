@@ -1,9 +1,9 @@
 const generateRequestUrlForSeveralGifs = (searchString, offset = 0) => {
-  return `http://api.giphy.com/v1/gifs/search${searchString}&api_key=C1HjBbRbN4I6lKblBGpY1bxcpdopyH6T&offset=${offset}&limit=5`;
+  return `https://api.giphy.com/v1/gifs/search${searchString}&api_key=C1HjBbRbN4I6lKblBGpY1bxcpdopyH6T&offset=${offset}&limit=5`;
 };
 
 const generateRequestUrlForSingleGif = id => {
-  return `http://api.giphy.com/v1/gifs/${id}?api_key=C1HjBbRbN4I6lKblBGpY1bxcpdopyH6T`;
+  return `https://api.giphy.com/v1/gifs/${id}?api_key=C1HjBbRbN4I6lKblBGpY1bxcpdopyH6T`;
 };
 
 export function fetchGifs(searchString, offset) {
