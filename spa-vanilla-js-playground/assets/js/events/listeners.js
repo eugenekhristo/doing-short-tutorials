@@ -1,5 +1,5 @@
 import state from "../state.js";
-import { replaceSpacesWithSymbol } from "../utils.js";
+import { replaceSpacesWithSymbol, getQueryStringValueOfCurrentPage } from "../utils.js";
 import {
   homeFormEl,
   homeInputEl,
@@ -50,8 +50,7 @@ function search() {
   searchSubmitBtnEl.addEventListener("click", handleShowMore);
   searchShowMoreBtnEl.addEventListener("click", handleShowMore);
 
-  const queryParams = new URLSearchParams(window.location.search);
-  const queryStringValueForInput = queryParams.get("q");
+  const queryStringValueForInput = getQueryStringValueOfCurrentPage();
   searchInputEl.value = queryStringValueForInput;
 
   searchSubmitBtnEl.disabled = !state.queryString;

@@ -10,6 +10,7 @@ export function replaceSpacesWithSymbol(text = "", symbol = "") {
   return text.trim().replace(/\s+/g, symbol);
 }
 
+
 /**
  * Take a query string and returns "search string"
  * @param {string} queryString string in a+bc+a format
@@ -29,6 +30,11 @@ export function getPureFirstPartOfPathName() {
 
 export function getIdParamValueFromUrl() {
   return window.location.pathname.split('/').reverse()[0];
+}
+
+export function getQueryStringValueOfCurrentPage() {
+  const searchParams = new URLSearchParams(window.location.search);
+  return searchParams.get("q");
 }
 
 function scrollToY(y) {
