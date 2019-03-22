@@ -8,6 +8,6 @@ export function search() {
   formEl = document.getElementById('search');
   inputEl = document.getElementById('searchInput');
   submitBtnEl = document.getElementById('submitSearch');
-  hGalleryEl = document.getElementById('gallery');
+  galleryEl = document.getElementById('gallery');
   showMoreBtnEl = document.getElementById('showMore');
 }

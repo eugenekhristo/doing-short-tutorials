@@ -1,10 +1,12 @@
+import { OFFSET_STEP } from '../../core/constants.js';
 import {
   makeQueryString,
   replaceSpacesWithSymbol,
-  getQueryStringValueOfCurrentPage
+  getQueryStringValueOfCurrentPage,
+  scrollPageToBottom
 } from '../../core/utils.js';
-import { HttpService } from '../../core/httpService.js';
-import * as state from '../../core/state.js';
+import HttpService from '../../core/httpService.js';
+import state from '../../core/state.js';
 import {
   formEl,
   inputEl,

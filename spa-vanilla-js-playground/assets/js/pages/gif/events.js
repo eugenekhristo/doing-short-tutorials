@@ -1,7 +1,7 @@
 import { getIdParamValueFromUrl } from '../../core/utils.js';
-import { HttpService } from '../../core/httpService.js';
+import HttpService from '../../core/httpService.js';
 import { Router } from '../../core/routing/router.js';
-import * as state from '../../core/state.js';
+import state from '../../core/state.js';
 import { goBackBtn } from './domElements.js';
 
 async function handleGifPageLoading() {

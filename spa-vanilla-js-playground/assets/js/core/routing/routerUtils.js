@@ -4,16 +4,14 @@ import {
   GIF_PATHNAME_REG_EXP
 } from '../constants.js';
 import { getPureFirstPartOfPathName } from '../utils.js';
-import {
-  selectAllElementsFor,
-  addEventListenersFor
-} from '../../pages/domModule.js';
-import { routes } from './router';
+import { selectAllElementsFor } from '../../pages/domElementsModule.js';
+import { addEventListenersFor } from '../../pages/domEventsModule.js';
+import { routes } from './router.js';
 
 const rootEl = document.getElementById('root');
 
 export function handleRouteSelection(pathName) {
-  if (SEARCH_PATHNAME_REG_EXP.test(pathName)) {
+  if (GIF_PATHNAME_REG_EXP.test(pathName)) {
     rootEl.innerHTML = routes['/gif/:id'];
   } else {
     rootEl.innerHTML = routes[pathName];
