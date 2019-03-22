@@ -50,7 +50,7 @@ export function gif() {
   handleGifPageLoading();
 
   goBackBtn.addEventListener('click', () => {
-    if (state.isPageLoadedForTheFirstTime) {
+    if (state.isAppLoadedForTheFirstTime) {
       Router.goTo('/');
     } else {
       window.history.back();

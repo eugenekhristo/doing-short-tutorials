@@ -6,6 +6,7 @@ import {
   scrollPageToBottom
 } from '../../core/utils.js';
 import HttpService from '../../core/httpService.js';
+import { Router } from '../../core/routing/router.js';
 import state from '../../core/state.js';
 import {
   formEl,
