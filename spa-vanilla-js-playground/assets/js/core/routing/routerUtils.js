@@ -4,8 +4,10 @@ import {
   GIF_PATHNAME_REG_EXP
 } from '../constants.js';
 import { getPureFirstPartOfPathName } from '../utils.js';
-import { selectAllElementsFor } from '../domElements.js';
-import { addEventListenersFor } from '../events/listeners.js';
+import {
+  selectAllElementsFor,
+  addEventListenersFor
+} from '../../pages/domModule.js';
 import { routes } from './router';
 
 const rootEl = document.getElementById('root');

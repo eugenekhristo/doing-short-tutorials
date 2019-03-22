@@ -9,11 +9,11 @@ export const routes = {
 };
 
 export const Router = {
-  goTo(pathName, searchString = '') {
+  goTo(pathName, queryString = '') {
     window.history.pushState(
       null,
       '',
-      window.location.origin + pathName + searchString
+      window.location.origin + pathName + queryString
     );
     handleRouteSelection(pathName);
     tunePage();
