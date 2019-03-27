@@ -1,13 +1,13 @@
-export let formEl;
-export let inputEl;
-export let submitBtnEl;
-export let galleryEl;
-export let showMoreBtnEl;
+export let formElement;
+export let inputElement;
+export let submitBtnElement;
+export let galleryElement;
+export let showMoreBtnElement;
 
 export function search() {
-  formEl = document.getElementById('search');
-  inputEl = document.getElementById('searchInput');
-  submitBtnEl = document.getElementById('submitSearch');
-  galleryEl = document.getElementById('gallery');
-  showMoreBtnEl = document.getElementById('showMore');
+  formElement = document.getElementById('search');
+  inputElement = document.getElementById('searchInput');
+  submitBtnElement = document.getElementById('submitSearch');
+  galleryElement = document.getElementById('gallery');
+  showMoreBtnElement = document.getElementById('showMore');
 }

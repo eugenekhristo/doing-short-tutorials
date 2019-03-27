@@ -2,7 +2,8 @@ import { getIdParamValueFromUrl } from '../../core/utils.js';
 import HttpService from '../../core/httpService.js';
 import { Router } from '../../core/routing/router.js';
 import state from '../../core/state.js';
-import { goBackBtn } from './domElements.js';
+import { goBackButton } from './domElements.js';
+import { setPreviousRoutePathnameAndSearch } from '../../core/routing/routerUtils.js';
 
 async function handleGifPageLoading() {
   const id = getIdParamValueFromUrl();
@@ -46,14 +47,19 @@ async function handleGifPageLoading() {
   gifRoot.innerHTML = HTMLTemplate;
 }
 
+export function handleHistoryGoBack() {
+  if (state.isAppLoadedForTheFirstTime) {
+    Router.goTo('/');
+  } else {
+    const { pathname, search } = state.previousRoutePathnameAndSearch;
+    Router.goTo(pathname, search);
+  }
+
+  setPreviousRoutePathnameAndSearch();
+}
+
 export function gif() {
   handleGifPageLoading();
 
-  goBackBtn.addEventListener('click', () => {
-    if (state.isAppLoadedForTheFirstTime) {
-      Router.goTo('/');
-    } else {
-      window.history.back();
-    }
-  });
+  goBackButton.addEventListener('click', handleHistoryGoBack);
 }

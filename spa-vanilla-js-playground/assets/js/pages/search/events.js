@@ -1,7 +1,7 @@
 import { OFFSET_STEP } from '../../core/constants.js';
 import {
-  makeQueryString,
-  replaceSpacesWithSymbol,
+  makeQueryStringForSearch,
+  replaceSpacesWithChar,
   getQueryStringValueOfCurrentPage,
   scrollPageToBottom
 } from '../../core/utils.js';
@@ -9,17 +9,17 @@ import HttpService from '../../core/httpService.js';
 import { Router } from '../../core/routing/router.js';
 import state from '../../core/state.js';
 import {
-  formEl,
-  inputEl,
-  submitBtnEl,
-  galleryEl,
-  showMoreBtnEl
+  formElement,
+  inputElement,
+  submitBtnElement,
+  galleryElement,
+  showMoreBtnElement
 } from './domElements.js';
 
 let galleryThumbnailsHTML = '';
 
 async function handleShowMore() {
-  const queryString = makeQueryString(state.queryStringValue);
+  const queryString = makeQueryStringForSearch(state.queryStringValue);
   window.history.pushState(
     null,
     '',
@@ -27,7 +27,6 @@ async function handleShowMore() {
   );
 
   const { data: gifsBlob } = await HttpService.getGifs(
-    queryString,
     state.thumbnailsOffsetInQueryString
   );
 
@@ -50,7 +49,7 @@ async function handleShowMore() {
   });
 
   galleryRowEl.insertAdjacentHTML('beforeend', galleryThumbnailsHTML);
-  galleryEl.append(galleryRowEl);
+  galleryElement.append(galleryRowEl);
 
   state.galleryThumbnailsHTML += galleryThumbnailsHTML;
   galleryThumbnailsHTML = '';
@@ -63,27 +62,27 @@ export function search() {
   if (!state.galleryThumbnailsHTML) {
     handleShowMore();
   } else {
-    galleryEl.innerHTML = state.galleryThumbnailsHTML;
+    galleryElement.innerHTML = state.galleryThumbnailsHTML;
   }
 
-  formEl.addEventListener('submit', e => {
+  formElement.addEventListener('submit', e => {
     e.preventDefault();
   });
 
-  inputEl.addEventListener('input', e => {
-    state.queryStringValue = replaceSpacesWithSymbol(e.target.value, '+');
-    submitBtnEl.disabled = !state.queryStringValue;
+  inputElement.addEventListener('input', e => {
+    state.queryStringValue = replaceSpacesWithChar(e.target.value, '+');
+    submitBtnElement.disabled = !state.queryStringValue;
   });
 
-  submitBtnEl.addEventListener('click', handleShowMore);
-  showMoreBtnEl.addEventListener('click', handleShowMore);
+  submitBtnElement.addEventListener('click', handleShowMore);
+  showMoreBtnElement.addEventListener('click', handleShowMore);
 
   const queryStringValueForInput = getQueryStringValueOfCurrentPage();
-  inputEl.value = queryStringValueForInput;
+  inputElement.value = queryStringValueForInput;
 
-  submitBtnEl.disabled = !state.queryStringValue;
+  submitBtnElement.disabled = !state.queryStringValue;
 
-  galleryEl.addEventListener('click', e => {
+  galleryElement.addEventListener('click', e => {
     const clickedElement = e.target;
     if (!clickedElement.matches('video.gallery__item')) return;
     // we can pass all parameters as query string

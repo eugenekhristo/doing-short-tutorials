@@ -1,9 +1,15 @@
-function getRequestUrlForSeveralGifs(queryString, offset = 0) {
-  return `https://api.giphy.com/v1/gifs/search${queryString}&api_key=C1HjBbRbN4I6lKblBGpY1bxcpdopyH6T&offset=${offset}&limit=5`;
+import state from './state.js';
+import { OFFSET_STEP } from './constants.js';
+
+const BASE_URL = 'https://api.giphy.com/v1/gifs';
+const API_KEY = 'C1HjBbRbN4I6lKblBGpY1bxcpdopyH6T';
+
+function getRequestUrlForMultipleGifs(offset = 0) {
+  return `${BASE_URL}/search?q=${state.queryStringValue}&api_key=${API_KEY}&offset=${offset}&limit=${OFFSET_STEP}`;
 }
 
 function getRequestUrlForSingleGif(id) {
-  return `https://api.giphy.com/v1/gifs/${id}?api_key=C1HjBbRbN4I6lKblBGpY1bxcpdopyH6T`;
+  return `${BASE_URL}/${id}?api_key=${API_KEY}`;
 }
 
 function getGifInfoDto(gifBlob) {
@@ -21,22 +27,18 @@ function getGifInfoDto(gifBlob) {
 }
 
 const HttpService = {
-  getGifs(queryString, offset) {
-    return Promise.resolve(
-      fetch(getRequestUrlForSeveralGifs(queryString, offset))
+  getGifs(offset) {
+    return fetch(getRequestUrlForMultipleGifs(offset))
       .then(blob => blob.json())
-      .catch(console.log)
-    );
+      .catch(console.log);
   },
 
   async getGifById(id) {
     try {
-      const { data: gifBlob } = await fetch(getRequestUrlForSingleGif(id))
-                                .then(blob => blob.json());
-
+      const blob  = await fetch(getRequestUrlForSingleGif(id));
+      const { data: gifBlob } = await blob.json();
       const gifInfo = getGifInfoDto(gifBlob);
-      return Promise.resolve(gifInfo);
-
+      return gifInfo;
     } catch (error) {
       console.log(error);
     }

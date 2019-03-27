@@ -1,8 +1,8 @@
-export function replaceSpacesWithSymbol(text = '', symbol = '') {
+export function replaceSpacesWithChar(text = '', symbol = '') {
   return text.trim().replace(/\s+/g, symbol);
 }
 
-export function makeQueryString(queryStringValue) {
+export function makeQueryStringForSearch(queryStringValue) {
   return `?q=${queryStringValue}`;
 }
 

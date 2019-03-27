@@ -1,9 +1,9 @@
-export let formEl;
-export let inputEl;
-export let submitBtnEl;
+export let formElement;
+export let inputElement;
+export let submitBtnElement;
 
 export function home() {
-  formEl = document.getElementById('search');
-  inputEl = document.getElementById('searchInput');
-  submitBtnEl = document.getElementById('submitSearch');
+  formElement = document.getElementById('search');
+  inputElement = document.getElementById('searchInput');
+  submitBtnElement = document.getElementById('submitSearch');
 }
