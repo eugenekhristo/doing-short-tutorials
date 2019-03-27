@@ -58,7 +58,7 @@ export function handleHistoryGoBack() {
   setPreviousRoutePathnameAndSearch();
 }
 
-export function gif() {
+export function addEventListeners() {
   handleGifPageLoading();
 
   goBackButton.addEventListener('click', handleHistoryGoBack);

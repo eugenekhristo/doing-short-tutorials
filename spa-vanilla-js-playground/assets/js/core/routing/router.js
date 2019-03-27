@@ -1,12 +1,13 @@
 import {
   handleRouteSelection,
-  selectAllElementsForPageAndAddEventListenersToThem,
   setPreviousRoutePathnameAndSearch
 } from './routerUtils.js';
 import state from '../state.js';
 import * as routePages from './routePages.js';
 import { handleHistoryGoBack } from '../../pages/gif/events.js';
 import { addEventListenersToElementsOfThePage as addEventListenersForHome } from '../../pages/home/initializePage.js';
+import { addEventListenersToElementsOfThePage as addEventListenersForSearch} from '../../pages/search/initializePage.js';
+import { addEventListenersToElementsOfThePage as addEventListenersForGif } from '../../pages/gif/initializePage.js';
 
 export const routes = {
   '/': {
@@ -16,11 +17,13 @@ export const routes = {
   },
   '/search': {
     template: routePages.searchPage,
-    regexp: /^\/search$/
+    regexp: /^\/search$/,
+    addEventListenersForThePage: addEventListenersForSearch
   },
   '/gif/:id': {
     template: routePages.gifPage,
-    regexp: /^\/gif\/:?\w+$/
+    regexp: /^\/gif\/:?\w+$/,
+    addEventListenersForThePage: addEventListenersForGif
   }
 };
 
@@ -34,7 +37,6 @@ export const Router = {
       window.location.origin + pathName + queryString
     );
     handleRouteSelection(pathName);
-    selectAllElementsForPageAndAddEventListenersToThem();
     state.isAppLoadedForTheFirstTime = false;
   }
 };

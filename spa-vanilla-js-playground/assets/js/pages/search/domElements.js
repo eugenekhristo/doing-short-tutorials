@@ -4,7 +4,7 @@ export let submitBtnElement;
 export let galleryElement;
 export let showMoreBtnElement;
 
-export function search() {
+export function selectAllElements() {
   formElement = document.getElementById('search');
   inputElement = document.getElementById('searchInput');
   submitBtnElement = document.getElementById('submitSearch');

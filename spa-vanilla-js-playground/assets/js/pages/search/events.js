@@ -58,7 +58,7 @@ async function handleShowMore() {
   scrollPageToBottom();
 }
 
-export function search() {
+export function addEventListeners() {
   if (!state.galleryThumbnailsHTML) {
     handleShowMore();
   } else {

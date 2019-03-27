@@ -1,5 +1,5 @@
 export let goBackButton;
 
-export function gif() {
+export function selectAllElements() {
   goBackButton = document.getElementById('goBackBtn');
 }
