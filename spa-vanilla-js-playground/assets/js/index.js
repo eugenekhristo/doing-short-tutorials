@@ -1,6 +1,3 @@
-import { handleRouteSelection, selectAllElementsForPageAndAddEventListenersToThem } from './core/routing/routerUtils.js';
+import { initApp } from './core/routing/routerUtils.js';
 
-(function initApp() {
-  handleRouteSelection(window.location.pathname);
-  selectAllElementsForPageAndAddEventListenersToThem();
-})();
+initApp();

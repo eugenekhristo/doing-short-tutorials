@@ -46,3 +46,8 @@ export function setPreviousRoutePathnameAndSearch() {
     search: window.location.search
   };
 }
+
+export function initApp() {
+  handleRouteSelection(window.location.pathname);
+  selectAllElementsForPageAndAddEventListenersToThem();
+}
