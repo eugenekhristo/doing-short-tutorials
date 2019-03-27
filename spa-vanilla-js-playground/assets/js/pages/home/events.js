@@ -8,7 +8,7 @@ async function handleHomeSubmit() {
   Router.goTo('/search', queryString);
 }
 
-export function home() {
+export function addEventListeners() {
   formElement.addEventListener('submit', e => {
     e.preventDefault();
   });

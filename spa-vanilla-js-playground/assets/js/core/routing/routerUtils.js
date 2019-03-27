@@ -1,6 +1,3 @@
-import { getPureFirstPartOfPathName } from '../utils.js';
-import { selectAllElementsFor } from '../../pages/domElementsModule.js';
-import { addEventListenersFor } from '../../pages/domEventsModule.js';
 import { routes } from './router.js';
 import state from '../state.js';
 
@@ -15,7 +12,9 @@ export function handleRouteSelection(pathName) {
         pathNameRegExp.test(routeName)
       );
 
-      return rootEl.innerHTML = routes[routeToChoose].template;
+      rootEl.innerHTML = routes[routeToChoose].template;
+      routes[routeToChoose].addEventListenersForThePage();
+      return;
     }
   }
 }
@@ -30,10 +29,6 @@ export function selectAllElementsForPageAndAddEventListenersToThem() {
     return;
   }
 
-  // Select All Elements and addEventListeners for the page with matching pathname
-  const purePathName = getPureFirstPartOfPathName();
-  selectAllElementsFor[purePathName]();
-  addEventListenersFor[purePathName]();
 }
 
 export function getRegexpsOfAllRoutes(routes) {

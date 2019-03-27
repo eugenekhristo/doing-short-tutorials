@@ -6,11 +6,13 @@ import {
 import state from '../state.js';
 import * as routePages from './routePages.js';
 import { handleHistoryGoBack } from '../../pages/gif/events.js';
+import { addEventListenersToElementsOfThePage as addEventListenersForHome } from '../../pages/home/initializePage.js';
 
 export const routes = {
   '/': {
     template: routePages.homePage,
-    regexp: /^\/$/
+    regexp: /^\/$/,
+    addEventListenersForThePage: addEventListenersForHome
   },
   '/search': {
     template: routePages.searchPage,
@@ -36,6 +38,5 @@ export const Router = {
     state.isAppLoadedForTheFirstTime = false;
   }
 };
-
 
 window.addEventListener('popstate', handleHistoryGoBack);
