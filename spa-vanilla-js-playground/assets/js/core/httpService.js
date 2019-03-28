@@ -4,8 +4,24 @@ import { OFFSET_STEP } from './constants.js';
 const BASE_URL = 'https://api.giphy.com/v1/gifs';
 const API_KEY = 'C1HjBbRbN4I6lKblBGpY1bxcpdopyH6T';
 
+function generateQueryString(options) {
+  const keys = Object.keys(options);
+  const values = Object.values(options);
+  let queryString = '';
+
+  keys.forEach((key, i) => (queryString += `${key}=${values[i]}&`));
+
+  return `?${queryString.slice(0, -1)}`;
+}
+
 function getRequestUrlForMultipleGifs(offset = 0) {
-  return `${BASE_URL}/search?q=${state.queryStringValue}&api_key=${API_KEY}&offset=${offset}&limit=${OFFSET_STEP}`;
+  const options = {
+    q: state.queryStringValue,
+    api_key: API_KEY,
+    offset,
+    limit: OFFSET_STEP
+  };
+  return `${BASE_URL}/search${generateQueryString(options)}`;
 }
 
 function getRequestUrlForSingleGif(id) {
@@ -35,7 +51,7 @@ const HttpService = {
 
   async getGifById(id) {
     try {
-      const blob  = await fetch(getRequestUrlForSingleGif(id));
+      const blob = await fetch(getRequestUrlForSingleGif(id));
       const { data: gifBlob } = await blob.json();
       const gifInfo = getGifInfoDto(gifBlob);
       return gifInfo;

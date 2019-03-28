@@ -1,7 +1,6 @@
 import { OFFSET_STEP } from '../../core/constants.js';
 import {
   makeQueryStringForSearch,
-  replaceSpacesWithChar,
   getQueryStringValueOfCurrentPage,
   scrollPageToBottom
 } from '../../core/utils.js';
@@ -70,7 +69,7 @@ export function addEventListeners() {
   });
 
   inputElement.addEventListener('input', e => {
-    state.queryStringValue = replaceSpacesWithChar(e.target.value, '+');
+    state.queryStringValue = encodeURI(e.target.value);
     submitBtnElement.disabled = !state.queryStringValue;
   });
 

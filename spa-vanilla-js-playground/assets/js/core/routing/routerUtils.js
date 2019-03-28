@@ -7,15 +7,15 @@ const pathNamesRegExps = getRegexpsOfAllRoutes(routes);
 export function handleRouteSelection(pathName) {
   const routesKeys = Object.keys(routes);
   for (const pathNameRegExp of pathNamesRegExps) {
-    if (pathNameRegExp.test(pathName)) {
-      const routeToChoose = routesKeys.find(routeName =>
-        pathNameRegExp.test(routeName)
-      );
+    if (!pathNameRegExp.test(pathName)) continue;
 
-      rootEl.innerHTML = routes[routeToChoose].template;
-      routes[routeToChoose].addEventListenersForThePage();
-      return;
-    }
+    const routeToChoose = routesKeys.find(routeName =>
+      pathNameRegExp.test(routeName)
+    );
+
+    rootEl.innerHTML = routes[routeToChoose].template;
+    routes[routeToChoose].addEventListenersForThePage();
+    return;
   }
 }
 
@@ -28,7 +28,6 @@ export function selectAllElementsForPageAndAddEventListenersToThem() {
     alert('UNKNOWN ROUTE!');
     return;
   }
-
 }
 
 export function getRegexpsOfAllRoutes(routes) {

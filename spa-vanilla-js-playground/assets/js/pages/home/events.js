@@ -1,4 +1,4 @@
-import { makeQueryStringForSearch, replaceSpacesWithChar } from '../../core/utils.js';
+import { makeQueryStringForSearch } from '../../core/utils.js';
 import { Router } from '../../core/routing/router.js';
 import state from '../../core/state.js';
 import { formElement, inputElement, submitBtnElement } from './domElements.js';
@@ -14,7 +14,7 @@ export function addEventListeners() {
   });
 
   inputElement.addEventListener('input', e => {
-    state.queryStringValue = replaceSpacesWithChar(e.target.value, '+');
+    state.queryStringValue = encodeURI(e.target.value);
     submitBtnElement.disabled = !state.queryStringValue;
   });
 
