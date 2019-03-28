@@ -20,7 +20,7 @@ let galleryThumbnailsHTML = '';
 
 async function handleShowMore() {
   const queryString = makeQueryStringForSearch(state.queryStringValue);
-  window.history.pushState(
+  window.history.replaceState(
     null,
     '',
     `${window.location.origin}/search${queryString}`

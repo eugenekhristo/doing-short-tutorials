@@ -49,17 +49,20 @@ async function handleGifPageLoading() {
 
 export function handleHistoryGoBack() {
   if (state.isAppLoadedForTheFirstTime) {
+    setPreviousRoutePathnameAndSearch();
     Router.goTo('/');
   } else {
     const { pathname, search } = state.previousRoutePathnameAndSearch;
+    setPreviousRoutePathnameAndSearch();
     Router.goTo(pathname, search);
   }
-
-  setPreviousRoutePathnameAndSearch();
 }
 
 export function addEventListeners() {
   handleGifPageLoading();
 
-  goBackButton.addEventListener('click', handleHistoryGoBack);
+  
+  goBackButton.addEventListener('click', () => {
+    handleHistoryGoBack();
+  });
 }

@@ -41,4 +41,6 @@ export const Router = {
   }
 };
 
-window.addEventListener('popstate', handleHistoryGoBack);
+window.addEventListener('popstate', () => {
+  handleRouteSelection(window.location.pathname);
+});
