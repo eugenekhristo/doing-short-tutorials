@@ -1,7 +1,7 @@
 import { selectAllElements } from './domElements.js';
 import { addEventListeners } from './events.js';
 
-export function addEventListenersToElementsOfThePage() {
+export function addEventListenersToElements() {
   selectAllElements();
   addEventListeners();
 }

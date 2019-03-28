@@ -10,9 +10,9 @@ import state from '../../core/state.js';
 import {
   formElement,
   inputElement,
-  submitBtnElement,
+  submitButtonElement,
   galleryElement,
-  showMoreBtnElement
+  showMoreButtonElement
 } from './domElements.js';
 
 let galleryThumbnailsHTML = '';
@@ -29,8 +29,8 @@ async function handleShowMore() {
     state.thumbnailsOffsetInQueryString
   );
 
-  const galleryRowEl = document.createElement('div');
-  galleryRowEl.className = 'gallery__row';
+  const galleryRowElement = document.createElement('div');
+  galleryRowElement.className = 'gallery__row';
 
   gifsBlob.forEach(blob => {
     const { mp4 } = blob.images.fixed_width;
@@ -47,8 +47,8 @@ async function handleShowMore() {
     `;
   });
 
-  galleryRowEl.insertAdjacentHTML('beforeend', galleryThumbnailsHTML);
-  galleryElement.append(galleryRowEl);
+  galleryRowElement.insertAdjacentHTML('beforeend', galleryThumbnailsHTML);
+  galleryElement.append(galleryRowElement);
 
   state.galleryThumbnailsHTML += galleryThumbnailsHTML;
   galleryThumbnailsHTML = '';
@@ -70,16 +70,16 @@ export function addEventListeners() {
 
   inputElement.addEventListener('input', e => {
     state.queryStringValue = encodeURI(e.target.value);
-    submitBtnElement.disabled = !state.queryStringValue;
+    submitButtonElement.disabled = !state.queryStringValue;
   });
 
-  submitBtnElement.addEventListener('click', handleShowMore);
-  showMoreBtnElement.addEventListener('click', handleShowMore);
+  submitButtonElement.addEventListener('click', handleShowMore);
+  showMoreButtonElement.addEventListener('click', handleShowMore);
 
   const queryStringValueForInput = getQueryStringValueOfCurrentPage();
   inputElement.value = queryStringValueForInput;
 
-  submitBtnElement.disabled = !state.queryStringValue;
+  submitButtonElement.disabled = !state.queryStringValue;
 
   galleryElement.addEventListener('click', e => {
     const clickedElement = e.target;

@@ -1,13 +1,13 @@
 export let formElement;
 export let inputElement;
-export let submitBtnElement;
+export let submitButtonElement;
 export let galleryElement;
-export let showMoreBtnElement;
+export let showMoreButtonElement;
 
 export function selectAllElements() {
   formElement = document.getElementById('search');
   inputElement = document.getElementById('searchInput');
-  submitBtnElement = document.getElementById('submitSearch');
+  submitButtonElement = document.getElementById('submitSearch');
   galleryElement = document.getElementById('gallery');
-  showMoreBtnElement = document.getElementById('showMore');
+  showMoreButtonElement = document.getElementById('showMore');
 }

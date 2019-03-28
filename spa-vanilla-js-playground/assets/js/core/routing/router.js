@@ -4,10 +4,9 @@ import {
 } from './routerUtils.js';
 import state from '../state.js';
 import * as routePages from './routePages.js';
-import { handleHistoryGoBack } from '../../pages/gif/events.js';
-import { addEventListenersToElementsOfThePage as addEventListenersForHome } from '../../pages/home/initializePage.js';
-import { addEventListenersToElementsOfThePage as addEventListenersForSearch} from '../../pages/search/initializePage.js';
-import { addEventListenersToElementsOfThePage as addEventListenersForGif } from '../../pages/gif/initializePage.js';
+import { addEventListenersToElements as addEventListenersForHome } from '../../pages/home/initializePage.js';
+import { addEventListenersToAllElements as addEventListenersForSearch } from '../../pages/search/initializePage.js';
+import { addEventListenersToAllElements as addEventListenersForGif } from '../../pages/gif/initializePage.js';
 
 export const routes = {
   '/': {
